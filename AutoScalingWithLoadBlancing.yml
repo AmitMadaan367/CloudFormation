@@ -71,6 +71,7 @@ Resources:
           Value: PublicSubnet
       VpcId: !Ref VPC
 
+  #Creating second Public Subnet
   SecondSubnet:
     Type: AWS::EC2::Subnet
     Properties:
@@ -101,13 +102,14 @@ Resources:
       GatewayId: !Ref InternetGateway
       RouteTableId: !Ref PublicRouteTable
 
-  # Associate Public Subnet with Public Route Table
+  # Associate  Public Subnet with Public Route Table
   PublicSubnetRouteTableAssociationFirst:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
       RouteTableId: !Ref PublicRouteTable
       SubnetId: !Ref PublicSubnet
 
+  # Associate second Public Subnet with Public Route Table
   PublicSubnetRouteTableAssociationSecond:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
@@ -160,7 +162,7 @@ Resources:
       Protocol: HTTP
 
 
-
+  # Creating LoadBalancerListener rule
   ListenerRule:
     Type: AWS::ElasticLoadBalancingV2::ListenerRule
     Properties: 
@@ -176,11 +178,7 @@ Resources:
       Priority: 2
   
 
-
-
-
-
-
+ # Creating LaunchConfig
   LaunchConfig:
     Type: AWS::AutoScaling::LaunchConfiguration
     Properties:
